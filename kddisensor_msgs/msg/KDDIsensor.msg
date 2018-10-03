@@ -1,0 +1,10 @@
+string time
+int32 humidity
+int32 temperature
+int32 brightness
+string atmopressure
+int32 volume
+int32 discomfort
+int32 heatstrokerisk
+int32 co2
+int32 ultraviolet

@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import rospy
+from std_msgs.msg import String
+from kddisensor_msgs.msg import KDDIsensor
+from sensor_msgs.msg import Image
+import time
+from rospy_message_converter import json_message_converter
+import json
+import cv2
+from cv_bridge import CvBridge, CvBridgeError
+
+NODE_NAME = 'kddisensor_sub'
+
+class KDDIsensor_sub:
+    def __init__(self):
+        rospy.init_node(NODE_NAME)
+        sub_data = rospy.Subscriber("kddisensor_pub/latest_data", KDDIsensor, self.callback_data)
+        sub_figure = rospy.Subscriber("kddisensor_pub/figure", Image, self.callback_figure)
+        self.jsonfile_name = "kddisensor_latest_data_sub.json"
+        self.figurefile_name = "kddifigure_sub.png"
+        self.bridge = CvBridge()
+
+    def callback_data(self, msg):
+        kddisensor_data = json.loads(json_message_converter.convert_ros_message_to_json(msg))
+        f = open(self.jsonfile_name,"w")
+        json.dump(kddisensor_data,f)
+        f.close()
+    
+    def callback_figure(self, msg):
+        cv_image = self.bridge.imgmsg_to_cv2(msg)
+        cv2.imwrite(self.figurefile_name, cv_image)
+        
+    def run(self):
+        rospy.spin()
+        
+if __name__ == '__main__':
+    a=KDDIsensor_sub()
+    a.run()
+        
+    
