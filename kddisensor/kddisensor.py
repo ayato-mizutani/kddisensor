@@ -236,7 +236,7 @@ def tophp():
     json.dump(data[0],f)
     f.close()
     #r = requests.post("http://192.168.20.42/sensorAPI.php", data=json.dumps(data))
-    print(r)
+    #print(r)
 
 def pic():
     url='http://192.168.20.61/pic.php'

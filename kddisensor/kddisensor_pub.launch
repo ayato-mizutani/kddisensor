@@ -1,0 +1,3 @@
+<launch>
+  <node name="kddisensor_pub" pkg="kddisensor" type="kddisensor_pub.py"  output="screen"/>
+</launch>

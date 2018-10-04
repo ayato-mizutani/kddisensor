@@ -1,0 +1,3 @@
+<launch>
+  <node name="send_mail" pkg="send_mail" type="send_mail.py"  output="screen"/>
+</launch>
