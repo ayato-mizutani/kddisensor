@@ -233,7 +233,7 @@ def tophp():
            "heatstrokerisk":result[8],
             "co2":result[9]}]
     f=open("kddisensor_latest_data.json","w")
-    json.dump(data[0],f)
+    json.dumps(data,f)
     f.close()
     #r = requests.post("http://192.168.20.42/sensorAPI.php", data=json.dumps(data))
     #print(r)
